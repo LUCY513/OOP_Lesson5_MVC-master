@@ -3,6 +3,7 @@ package personal.views;
 import personal.controllers.UserController;
 import personal.model.User;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ViewUser {
@@ -13,7 +14,7 @@ public class ViewUser {
         this.userController = userController;
     }
 
-    public void run(){
+    public void run() {
         Commands com = Commands.NONE;
 
         while (true) {
@@ -36,6 +37,9 @@ public class ViewUser {
                         throw new RuntimeException(e);
                     }
                     break;
+                case LIST:
+                    getListUser();
+                    break;
             }
         }
     }
@@ -44,5 +48,13 @@ public class ViewUser {
         Scanner in = new Scanner(System.in);
         System.out.print(message);
         return in.nextLine();
+    }
+
+    private void getListUser() {
+        List<User> userLists = userController.readUserList();
+        for (User e : userLists) {
+            System.out.println(e);
+            System.out.println();
+        }
     }
 }

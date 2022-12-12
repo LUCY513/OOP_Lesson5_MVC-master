@@ -11,6 +11,16 @@ public class RepositoryFile implements Repository {
         this.fileOperation = fileOperation;
     }
 
+    private User findUserById(List<User> users, String userId) throws Exception {
+        for (User user : users) {
+            if (user.getId().equals(userId)) {
+                return user;
+            }
+        }
+
+        throw new Exception("User not found");
+    }
+
     @Override
     public List<User> getAllUsers() {
         List<String> lines = fileOperation.readAllLines();
@@ -42,5 +52,11 @@ public class RepositoryFile implements Repository {
         }
         fileOperation.saveAllLines(lines);
         return id;
+    }
+
+    @Override
+    public User readUser(String userId) throws Exception {
+        List<User> users = this.getAllUsers();
+        return findUserById(users, userId);
     }
 }
