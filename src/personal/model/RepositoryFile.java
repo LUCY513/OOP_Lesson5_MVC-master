@@ -21,6 +21,23 @@ public class RepositoryFile implements Repository {
         throw new Exception("User not found");
     }
 
+    public User updateUser(User user) throws Exception {
+        List<User> users = this.getAllUsers();
+        User foundUser = findUserById(users, user.getId());
+        foundUser.setFirstName(user.getFirstName());
+        foundUser.setLastName(user.getLastName());
+        foundUser.setPhone(user.getPhone());
+        saveUsers(users);
+        return foundUser;
+    }
+    private void saveUsers(List<User> users) {
+        List<String> lines = new ArrayList<>();
+        for (User item : users) {
+            lines.add(mapper.map(item));
+        }
+        fileOperation.saveAllLines(lines);
+    }
+
     @Override
     public List<User> getAllUsers() {
         List<String> lines = fileOperation.readAllLines();
