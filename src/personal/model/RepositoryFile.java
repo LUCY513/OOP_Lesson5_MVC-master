@@ -7,6 +7,8 @@ public class RepositoryFile implements Repository {
     private UserMapper mapper = new UserMapper();
     private FileOperation fileOperation;
 
+
+
     public RepositoryFile(FileOperation fileOperation) {
         this.fileOperation = fileOperation;
     }
@@ -30,6 +32,7 @@ public class RepositoryFile implements Repository {
         saveUsers(users);
         return foundUser;
     }
+
     private void saveUsers(List<User> users) {
         List<String> lines = new ArrayList<>();
         for (User item : users) {
@@ -75,5 +78,11 @@ public class RepositoryFile implements Repository {
     public User readUser(String userId) throws Exception {
         List<User> users = this.getAllUsers();
         return findUserById(users, userId);
+    }
+
+    @Override
+    public void deleteUSer(User user) {
+        List<User> users = this.getAllUsers();
+        System.out.println(users.remove(user));
     }
 }

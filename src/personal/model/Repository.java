@@ -7,6 +7,7 @@ public interface Repository {
     String CreateUser(User user);
     User readUser(String userId) throws Exception;
     User updateUser(User user) throws Exception;
+    void deleteUSer(User user);
 
 
 }

@@ -34,4 +34,9 @@ public class UserController {
         if (user.getLastName().isEmpty()) { throw new Exception("Non LastName"); }
         if (user.getPhone().isEmpty()) { throw new Exception("Non phone"); }
     }
+
+    public void deleteUser(User user){
+        repository.deleteUSer(user);
+    }
+
 }
