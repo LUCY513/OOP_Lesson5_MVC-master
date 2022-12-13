@@ -54,7 +54,6 @@ public class ViewUser {
                         String idUse = prompt("Идентификатор пользователя: ");
                         User userDelete = userController.readUser(idUse);
                         userController.deleteUser(userDelete);
-
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
